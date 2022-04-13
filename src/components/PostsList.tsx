@@ -1,10 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Post } from '../api/types'
+import { getPosts } from '../api/post'
 import PostItem from './PostItem'
 
 const PostsList = () => {
     const [posts, setPosts] = useState<Array<Post>>([])
     const [loading, setLoading] = useState(false)
+
+
+    async function _getPosts() {
+      console.log("useEffect");
+      const data = await getPosts();
+      setPosts(data);
+    }
+
+    useEffect(() => {
+      _getPosts();
+    }, []);
 
     function renderItem(values: Post) {
         return (
@@ -13,7 +25,7 @@ const PostsList = () => {
             </div>
         )
     }
-
+    // Display "Loading" when data are actually loading
     if (loading) {
         return (
             <section className="hero">
@@ -23,7 +35,7 @@ const PostsList = () => {
             </section>
         )
     }
-
+    // Display "no posts" if there is no posts
     if (posts.length === 0) {
         return (
             <section className="hero">

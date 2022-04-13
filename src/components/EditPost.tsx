@@ -1,8 +1,10 @@
-import React, { useReducer, useState } from 'react'
+import React, { useReducer, useState, useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Picker_Picture, Post, PostContent, User } from '../api/types'
 import Field from '../private/Field'
 import ImageGalleryPicker from './ImageGalleryPicker'
+import { getPosts, getPost, deletePost, updatePost, createPost } from '../api/post'
+import { getAllUser } from '../api/user'
 
 type FormEvent =
     | React.ChangeEvent<HTMLTextAreaElement>
@@ -26,7 +28,31 @@ const EditPost = () => {
         {} as Post | PostContent
     )
     let { id } = useParams() // post id from url
+
+    console.log("id", id);
     const navigate = useNavigate() // create a navigate function instance
+
+    async function _getPosts(id: number){
+      const data = await getPost(id);
+      convertToFormData(data);
+    }
+
+    async function _getUsers(){
+      const data = await getAllUser();
+      setUsers(data);
+    }
+
+
+    useEffect(() => {
+      // au start du composant
+      _getPosts(Number(id));
+    }, [id]);
+
+    useEffect(() => {
+      _getUsers();
+    }, [id]);
+
+
 
     function handleModalPictureSubmit(picture: Picker_Picture) {
         setFormData({
@@ -93,10 +119,12 @@ const EditPost = () => {
         if (formData.userId) {
             // [WORK]
             // You need to find the author name with the server
-            return '[TO DO]'
-        } else {
-            return 'Unknown author'
+          const selectedUser = users.find((user) => user.id === formData.userId)
+          if (selectedUser) {
+            return selectedUser.name;
+          }
         }
+        return 'Unknown author'
     }
 
     return (
@@ -109,6 +137,7 @@ const EditPost = () => {
                         className="input"
                         type="text"
                         placeholder="Text input"
+                        onChange={handleChange}
                         value={formData.title}
                     />
                 </Field>
@@ -118,6 +147,7 @@ const EditPost = () => {
                         name="body"
                         className="textarea"
                         placeholder="e.g. Hello world"
+                        onChange={handleChange}
                         value={formData.body}
                     />
                 </Field>
