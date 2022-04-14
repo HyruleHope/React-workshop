@@ -1,5 +1,6 @@
 import { Post, PostContent } from './types'
 import axios from 'axios'
+import React, { useState } from 'react'
 
 const base_url = 'http://localhost:3004/posts'
 
@@ -14,18 +15,20 @@ async function getPosts(): Promise<Array<Post>> {
   const response = await fetch(base_url);
   return await response.json();
 }
-
-async function createPost(post: PostContent): Promise<Post> {
-    // create a new post
-    // [TODO] remove this return to use a fetch API
-    return {
-        id: 4,
-        title: 'title',
-        userId: 1,
-        body: 'body',
-        postImageUrl: 'https://picsum.photos/1280/960',
-    }
-}
+//
+// async function createPost(post: PostContent): Promise<Post> {
+//     // create a new post
+//     // [TODO] remove this return to use a fetch API
+//
+//
+//     // return {
+//     //     id: 4,
+//     //     title: 'title',
+//     //     userId: 1,
+//     //     body: 'body',
+//     //     postImageUrl: 'https://picsum.photos/1280/960',
+//     // }
+// }
 
 async function updatePost(post: Post): Promise<Post> {
     // update a existing post
@@ -38,11 +41,11 @@ async function updatePost(post: Post): Promise<Post> {
         postImageUrl: 'https://picsum.photos/1280/960',
     }
 }
+//
+// async function deletePost(postID: Post['id']): Promise<Post['id']> {
+//     // delete a existing post
+//     // [TODO] remove this return to use a fetch API
+//     return 1
+// }
 
-async function deletePost(postID: Post['id']): Promise<Post['id']> {
-    // delete a existing post
-    // [TODO] remove this return to use a fetch API
-    return 1
-}
-
-export { getPost, getPosts, deletePost, updatePost, createPost }
+export { getPost, getPosts, updatePost }

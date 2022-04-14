@@ -1,14 +1,14 @@
+
 import React, { useReducer, useState, useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Picker_Picture, Post, PostContent, User } from '../api/types'
 import Field from '../private/Field'
 import ImageGalleryPicker from './ImageGalleryPicker'
-import { getPosts, getPost, deletePost, updatePost, createPost } from '../api/post'
+import { getPosts, getPost, updatePost } from '../api/post'
 import { getAllUser } from '../api/user'
 import axios from 'axios'
 
 const base_url = 'http://localhost:3004/posts'
-const post_url = 'http://localhost:3000/post'
 
 type FormEvent =
     | React.ChangeEvent<HTMLTextAreaElement>
@@ -33,7 +33,6 @@ const EditPost = () => {
     )
     let { id } = useParams() // post id from url
 
-    console.log("id", id);
     const navigate = useNavigate() // create a navigate function instance
 
     async function _getPosts(id: number){
@@ -48,7 +47,7 @@ const EditPost = () => {
 
 
     useEffect(() => {
-      // at component start
+      // au start du composant
       _getPosts(Number(id));
     }, [id]);
 
@@ -65,16 +64,26 @@ const EditPost = () => {
         })
     }
 
-    async function handleAddOrCreatePost(event: React.FormEvent<HTMLFormElement>) {
-
+    async function handleAddOrCreatePost(
+        event: React.FormEvent<HTMLFormElement>
+    ) {
+      return axios
+      .post(base_url, formData)
 
       // back to Home
       navigate('/')
+
+        // remove default reloading page
+        event.preventDefault()
+
+        // back to Home
+        navigate('/')
     }
 
     async function handleDeletePost() {
-      // back to Home
-      navigate('/')
+      axios.delete(`${base_url}/${id}`)
+        // back to Home
+        navigate('/')
     }
 
     function handleChange(event: FormEvent) {

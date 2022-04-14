@@ -9,7 +9,6 @@ const PostsList = () => {
 
 
     async function _getPosts() {
-      console.log("useEffect");
       const data = await getPosts();
       setPosts(data);
     }

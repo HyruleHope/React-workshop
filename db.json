@@ -20,6 +20,19 @@
       "userId": 1,
       "body": "body",
       "postImageUrl": "https://picsum.photos/1280/960"
+    },
+    {
+      "title": "cettte fois cest la bonne",
+      "body": "c'est un test ecrit",
+      "postImageUrl": "https://picsum.photos/id/1001/5616/3744",
+      "id": 5
+    },
+    {
+      "title": "nouveau post",
+      "body": "qui fonctione",
+      "postImageUrl": "https://picsum.photos/id/1023/3955/2094",
+      "userId": 2,
+      "id": 6
     }
   ],
   "users": [
