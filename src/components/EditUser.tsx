@@ -1,11 +1,11 @@
 import React, { useReducer, useState, useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { User } from '../api/types'
+import { getUser } from '../api/user'
 import Field from '../private/Field'
 import axios from 'axios'
 
-const base_url = 'http://localhost:3004/posts'
-const post_url = 'http://localhost:3000/post'
+const base_url = 'http://localhost:3004/users'
 
 type FormEvent =
     | React.ChangeEvent<HTMLTextAreaElement>
@@ -35,17 +35,24 @@ const EditUser = () => {
 
 
 
-    async function handleAddOrCreateUser(event: React.FormEvent<HTMLFormElement>) {
-      axios.post(base_url, formData)
+
+    async function handleAddOrCreateUser(
+      event: React.FormEvent<HTMLFormElement>
+    ) {
+      return axios
+      .post(base_url, formData)
 
       // back to Home
       navigate('/users')
+
+      // remove default reloading page
+      event.preventDefault()
     }
 
     async function handleDeleteUser() {
-
-      // back to Home
-      navigate('/')
+      axios.delete(`${base_url}/${id}`)
+        // back to Home
+        navigate('/')
     }
 
     function handleChange(event: FormEvent) {
@@ -61,10 +68,11 @@ const EditUser = () => {
 
 
 
+
     return (
         <>
         <form className="post-form" onSubmit={handleAddOrCreateUser}>
-            <Field label="name">
+            <Field label="Name">
                 <input
                     onBlur={handleChange}
                     name="name"
@@ -75,17 +83,7 @@ const EditUser = () => {
                     value={formData.name}
                 />
             </Field>
-            <Field label="Content">
-                <textarea
-                    onBlur={handleChange}
-                    name="username"
-                    className="textarea"
-                    placeholder="your username"
-                    onChange={handleChange}
-                    value={formData.username}
-                />
-            </Field>
-            <Field label="Content">
+            <Field label="Email">
                 <textarea
                     onBlur={handleChange}
                     name="email"
@@ -93,6 +91,16 @@ const EditUser = () => {
                     placeholder="your email"
                     onChange={handleChange}
                     value={formData.email}
+                />
+            </Field>
+            <Field label="Phone number">
+                <textarea
+                    onBlur={handleChange}
+                    name="phone"
+                    className="textarea"
+                    placeholder="your phone number"
+                    onChange={handleChange}
+                    value={formData.phone}
                 />
             </Field>
             {!!id && (

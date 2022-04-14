@@ -73,11 +73,8 @@ const EditPost = () => {
       // back to Home
       navigate('/')
 
-        // remove default reloading page
-        event.preventDefault()
-
-        // back to Home
-        navigate('/')
+      // remove default reloading page
+      event.preventDefault()
     }
 
     async function handleDeletePost() {

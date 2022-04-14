@@ -23,7 +23,7 @@ const AllUsers = () => {
         </div>
     )
   }
-
   return <ul className="user-list">{users.map(renderUsers)}</ul>
 }
+
 export default AllUsers
