@@ -5,14 +5,12 @@ const base_url = 'http://localhost:3004/posts'
 
 async function getPost(postID: Post['id']): Promise<Post> {
     // get a unique post
-    // [TODO] remove this return to use a fetch API
     const response = await fetch(`${base_url}/${postID}`);
     return await response.json();
 }
 
 async function getPosts(): Promise<Array<Post>> {
     // get all posts
-    // [TODO] remove this return to use a fetch API
   const response = await fetch(base_url);
   return await response.json();
 }
@@ -20,17 +18,8 @@ async function getPosts(): Promise<Array<Post>> {
 async function createPost(post: PostContent): Promise<Post> {
     // create a new post
     // [TODO] remove this return to use a fetch API
-
-    // // Send data to the backend via POST
-    //     fetch(base_url, {  // Enter your IP address here
-    //       method: 'POST',
-    //       mode: 'cors',
-    //       body: JSON.stringify(PostContent) // body data type must match "Content-Type" header
-    //
-    //     })
-
     return {
-        id: 1,
+        id: 4,
         title: 'title',
         userId: 1,
         body: 'body',

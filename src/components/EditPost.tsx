@@ -5,6 +5,10 @@ import Field from '../private/Field'
 import ImageGalleryPicker from './ImageGalleryPicker'
 import { getPosts, getPost, deletePost, updatePost, createPost } from '../api/post'
 import { getAllUser } from '../api/user'
+import axios from 'axios'
+
+const base_url = 'http://localhost:3004/posts'
+const post_url = 'http://localhost:3000/post'
 
 type FormEvent =
     | React.ChangeEvent<HTMLTextAreaElement>
@@ -44,7 +48,7 @@ const EditPost = () => {
 
 
     useEffect(() => {
-      // au start du composant
+      // at component start
       _getPosts(Number(id));
     }, [id]);
 
@@ -61,19 +65,16 @@ const EditPost = () => {
         })
     }
 
-    async function handleAddOrCreatePost(
-        event: React.FormEvent<HTMLFormElement>
-    ) {
-        // remove default reloading page
-        event.preventDefault()
+    async function handleAddOrCreatePost(event: React.FormEvent<HTMLFormElement>) {
 
-        // back to Home
-        navigate('/')
+
+      // back to Home
+      navigate('/')
     }
 
     async function handleDeletePost() {
-        // back to Home
-        navigate('/')
+      // back to Home
+      navigate('/')
     }
 
     function handleChange(event: FormEvent) {

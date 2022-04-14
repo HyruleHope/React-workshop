@@ -1,5 +1,7 @@
 # Workshop React
 
+///// Devoir Réalisée par Amelin BRUSA /////
+
 Bonjour à tous,
 
 Avant de reprendre nos cours de **React**, je vous donne un exercice afin de revoir les bases des interactions entre une webapp et un serveur.

@@ -22,13 +22,13 @@ const AllUsers = () => {
             <UserProfile {...values} />
         </div>
     )
-      //
+
       // return (
-      //     <div key={props.id}>
-      //       <h1>{props.name}</h1>
+      //     <div key={values.id}>
+      //       <h1>{values.name}</h1>
       //           <ul>
-      //             <li>Pseudo : {props.username}</li>
-      //             <li>Email : {props.email}</li>
+      //             <li>Pseudo : {values.username}</li>
+      //             <li>Email : {values.email}</li>
       //           </ul>
       //     </div>
       // )

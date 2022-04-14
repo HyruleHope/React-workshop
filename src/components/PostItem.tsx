@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useReducer, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Post, User } from '../api/types'
 
@@ -29,14 +29,14 @@ const PostItem = (props: Post) => {
                     </div>
                     <div className="content post-content">{props.body}</div>
                     {author && (
-                        <footer className="card-footer">
-                            <Link
-                                to={`/users/${author.id}`}
+                      <footer className="card-footer">
+                          <Link
+                                to={`/users/${props.userId}`}
                                 className="card-footer-item"
-                            >
+                          >
                                 {author ? author.name : 'not defined'}
-                            </Link>
-                        </footer>
+                          </Link>
+                      </footer>
                     )}
                 </div>
             </div>
