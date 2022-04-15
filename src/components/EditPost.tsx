@@ -39,11 +39,11 @@ const EditPost = () => {
       convertToFormData(data);
     }
 
+    // Retrieve the list of users to choose from
     async function _getUsers(){
       const data = await getAllUser();
       setUsers(data);
     }
-
 
     useEffect(() => {
       // au start du composant
@@ -54,8 +54,7 @@ const EditPost = () => {
       _getUsers();
     }, [id]);
 
-
-
+    // Manage the data set in the gallery picker
     function handleModalPictureSubmit(picture: Picker_Picture) {
         setFormData({
             name: 'postImageUrl',
@@ -63,6 +62,7 @@ const EditPost = () => {
         })
     }
 
+    // Manage posts creation and edit
     async function handleAddOrCreatePost(
         event: React.FormEvent<HTMLFormElement>
     ) {
@@ -78,11 +78,14 @@ const EditPost = () => {
         navigate('/')
     }
 
+    // Manage posts delete
     async function handleDeletePost() {
         // back to Home
         axios.delete(`${base_url}/${id}`)
         navigate('/')
     }
+
+    // Manage modification in placeholders
     function handleChange(event: FormEvent) {
         const value =
             event.target.name === 'userId'

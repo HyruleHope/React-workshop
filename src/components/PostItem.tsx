@@ -6,7 +6,6 @@ import { getUser } from '../api/user'
 const PostItem = (props: Post) => {
     const [author, setAuthor] = useState<User | null>(null)
 
-
     return (
         <Link to={`/post/${props.id}`} key={`key-${props.id}`}>
             <div className="card">

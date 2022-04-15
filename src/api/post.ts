@@ -29,7 +29,6 @@ async function createPost(post: PostContent): Promise<Post> {
 
 async function updatePost(post: Post): Promise<Post> {
     // update a existing post
-    // [TODO] remove this return to use a fetch API
     const updatePost = {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },

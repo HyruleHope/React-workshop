@@ -6,6 +6,7 @@ import UserProfile from './UserProfile'
 const AllUsers = () => {
   const [users, setUsers] = useState<Array<User>>([])
 
+  // Retrieve all users on the page
   async function _getAllUsers() {
     console.log("useEffect");
     const data = await getAllUser();
@@ -16,6 +17,7 @@ const AllUsers = () => {
     _getAllUsers();
   }, []);
 
+  // Render all user in the model of UserProfile
   function renderUsers(values: User) {
     return (
         <div key={values.id}>

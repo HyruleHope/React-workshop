@@ -33,8 +33,7 @@ const EditUser = () => {
     console.log("id", id);
     const navigate = useNavigate() // create a navigate function instance
 
-
-
+    // Manage users creation and edit
     async function handleAddOrCreateUser(
       event: React.FormEvent<HTMLFormElement>
     ) {
@@ -47,17 +46,18 @@ const EditUser = () => {
       navigate('/')
       } else {
          // await createUser(formData as User);
-
       navigate('/')
       }
     }
 
+    // Manage users delete
     async function handleDeleteUser() {
       axios.delete(`${base_url}/${id}`)
         // back to Home
         navigate('/')
     }
 
+    // Manage modification in placeholders
     function handleChange(event: FormEvent) {
         const value =
             event.target.name === 'userId'
@@ -68,7 +68,7 @@ const EditUser = () => {
             value,
         })
     }
-    
+
     return (
         <>
         <form className="post-form" onSubmit={handleAddOrCreateUser}>
