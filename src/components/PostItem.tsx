@@ -1,9 +1,11 @@
-import React, { useReducer, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useReducer, useState, useEffect } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import { Post, User } from '../api/types'
+import { getUser } from '../api/user'
 
 const PostItem = (props: Post) => {
     const [author, setAuthor] = useState<User | null>(null)
+
 
     return (
         <Link to={`/post/${props.id}`} key={`key-${props.id}`}>

@@ -1,10 +1,9 @@
-
 import React, { useReducer, useState, useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Picker_Picture, Post, PostContent, User } from '../api/types'
 import Field from '../private/Field'
 import ImageGalleryPicker from './ImageGalleryPicker'
-import { getPosts, getPost, updatePost } from '../api/post'
+import { getPosts, getPost, updatePost, createPost } from '../api/post'
 import { getAllUser } from '../api/user'
 import axios from 'axios'
 
@@ -67,24 +66,24 @@ const EditPost = () => {
     async function handleAddOrCreatePost(
         event: React.FormEvent<HTMLFormElement>
     ) {
-      return axios
-      .post(base_url, formData)
-
-      // back to Home
-      navigate('/')
-
-      // remove default reloading page
-      event.preventDefault()
-    }
-
-    async function handleDeletePost() {
-      axios.delete(`${base_url}/${id}`)
+        // remove default reloading page
+        console.log(formData);
+        event.preventDefault()
+        if (id) {
+           await updatePost(formData as Post);
+        } else {
+           await createPost(formData);
+        }
         // back to Home
         navigate('/')
     }
 
+    async function handleDeletePost() {
+        // back to Home
+        axios.delete(`${base_url}/${id}`)
+        navigate('/')
+    }
     function handleChange(event: FormEvent) {
-        //
         const value =
             event.target.name === 'userId'
                 ? Number(event.target.value)
@@ -124,8 +123,6 @@ const EditPost = () => {
     function getSelectedAuthor() {
         // prevent bad request and use a placeholder if no data
         if (formData.userId) {
-            // [WORK]
-            // You need to find the author name with the server
           const selectedUser = users.find((user) => user.id === formData.userId)
           if (selectedUser) {
             return selectedUser.name;

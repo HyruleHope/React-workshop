@@ -1,7 +1,7 @@
 import React, { useReducer, useState, useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { User } from '../api/types'
-import { getUser } from '../api/user'
+import { getUser, updateUser, createUser } from '../api/user'
 import Field from '../private/Field'
 import axios from 'axios'
 
@@ -35,18 +35,21 @@ const EditUser = () => {
 
 
 
-
     async function handleAddOrCreateUser(
       event: React.FormEvent<HTMLFormElement>
     ) {
-      return axios
-      .post(base_url, formData)
-
-      // back to Home
-      navigate('/users')
-
       // remove default reloading page
+      console.log(formData);
       event.preventDefault()
+      if (id) {
+          await updateUser(formData as User);
+
+      navigate('/')
+      } else {
+         // await createUser(formData as User);
+
+      navigate('/')
+      }
     }
 
     async function handleDeleteUser() {
@@ -65,10 +68,7 @@ const EditUser = () => {
             value,
         })
     }
-
-
-
-
+    
     return (
         <>
         <form className="post-form" onSubmit={handleAddOrCreateUser}>
