@@ -1,6 +1,6 @@
 # Workshop React
 
-///// Devoir Réalisée par Amelin BRUSA /////
+///// Devoir Réalisée par Amelin BRUSA, Sonia RENARD et Théo MACRON /////
 
 Bonjour à tous,
 

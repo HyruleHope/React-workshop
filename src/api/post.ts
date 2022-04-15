@@ -1,6 +1,4 @@
 import { Post, PostContent } from './types'
-import axios from 'axios'
-import React, { useState } from 'react'
 
 const base_url = 'http://localhost:3004/posts'
 

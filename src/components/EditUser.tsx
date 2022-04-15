@@ -1,7 +1,7 @@
-import React, { useReducer, useState, useEffect } from 'react'
+import React, { useReducer, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { User } from '../api/types'
-import { getUser, updateUser, createUser } from '../api/user'
+import { updateUser, createUser } from '../api/user'
 import Field from '../private/Field'
 import axios from 'axios'
 
@@ -22,7 +22,6 @@ const formReducer = (state: User, event: FormData) => {
 }
 
 const EditUser = () => {
-    const [users, setUsers] = useState<Array<User>>([])
     const [showPictureModal, setShowPictureModal] = useState<boolean>(false)
     const [formData, setFormData] = useReducer(
         formReducer,
